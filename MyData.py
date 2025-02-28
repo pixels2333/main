@@ -5,6 +5,7 @@ import pandas as pd
 from torch.utils.data import Dataset
 from torchvision import transforms
 
+
 class MyData(Dataset):
     def __init__(self, image_folder, excel_file, transform=None):
         self.image_folder = image_folder
@@ -30,10 +31,12 @@ class MyData(Dataset):
         for index, row in self.excel_data.iterrows():
             image_name = row['image']
             if image_name in self.images_data:
-                data = torch.tensor([row['LFW'], row['LDW'], row['LA']], dtype=torch.float32)
+                data = torch.tensor(
+                    [row['LFW'], row['LDW'], row['LA']], dtype=torch.float32)
                 data_tensors.append(data)
             else:
-                raise ValueError(f"No image found for the data entry: {image_name}")
+                raise ValueError(
+                    f"No image found for the data entry: {image_name}")
         return data_tensors
 
     def __len__(self):

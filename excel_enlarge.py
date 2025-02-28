@@ -1,5 +1,5 @@
-#excel_enlarge
-#该程序用于同步图片数据集扩增后，实现excel数据集扩增
+# excel_enlarge
+# 该程序用于同步图片数据集扩增后，实现excel数据集扩增
 
 
 import pandas as pd
@@ -7,6 +7,8 @@ import os
 import re
 
 # 定义一个函数来复制数据
+
+
 def copy_data(df, original_name, new_name):
     # 找到原始图片名称对应的行
     original_rows = df[df['image'].astype(str) == original_name].copy()
@@ -17,6 +19,7 @@ def copy_data(df, original_name, new_name):
         new_row['image'] = new_name
         return new_row
     return None
+
 
 # 读取Excel文件
 excel_path = 'T_V_img_data/val_enlarge.xlsx'  # Excel文件路径
@@ -56,7 +59,8 @@ for new_image, base_name in new_images_to_add:
     new_data = copy_data(df_excel, original_image_name, new_image)
     if new_data is not None:
         # 将复制的数据添加到DataFrame中
-        df_excel = pd.concat([df_excel, pd.DataFrame([new_data])], ignore_index=True)
+        df_excel = pd.concat(
+            [df_excel, pd.DataFrame([new_data])], ignore_index=True)
 
 # 打印新添加的图片数量
 print(f"Added {len(new_images_to_add)} new images to the DataFrame.")

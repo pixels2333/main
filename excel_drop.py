@@ -1,5 +1,5 @@
-#excel_drop程序
-#主要用于将数据按照图片进行提取并写入新的数据集
+# excel_drop程序
+# 主要用于将数据按照图片进行提取并写入新的数据集
 
 
 import os
@@ -19,7 +19,8 @@ if not os.path.exists(output_dir):
 df = pd.read_excel(excel_path)
 
 # 获取图像文件列表
-image_files = [f for f in os.listdir(image_dir) if f.endswith(('.png', '.jpg', '.jpeg'))]
+image_files = [f for f in os.listdir(
+    image_dir) if f.endswith(('.png', '.jpg', '.jpeg'))]
 image_files.sort()  # 确保图像列表是有序的，如果不需要可以删除此行
 
 # 创建一个新的Excel工作簿

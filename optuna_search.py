@@ -9,7 +9,6 @@ from CNN_model import *  # 假设这是你的CNN模型定义
 from MyData import *  # 假设这是你的自定义数据集定义
 
 
-
 # 自定义MAPE损失函数和评估指标函数保持不变
 class MAPELoss(nn.Module):
     def __init__(self):
@@ -25,7 +24,7 @@ class MAPELoss(nn.Module):
         return loss
 
 
-#定义R2决定系数
+# 定义R2决定系数
 def r2_score(predictions, targets):
     predictions_mean = targets.mean()
     ss_total = torch.sum((targets - predictions_mean) ** 2)
@@ -34,7 +33,7 @@ def r2_score(predictions, targets):
     return r2.item()
 
 
-#定义NRMSE
+# 定义NRMSE
 def nrmse_score(predictions, targets, data_range=None):
     if data_range is None:
         data_range = targets.max() - targets.min()
@@ -55,8 +54,6 @@ def calculate_r2_and_nrmse(predictions, targets):
     return r2, nrmse
 
 
-
-
 # 定义超参数调优的目标函数
 def objective(trial):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -69,20 +66,21 @@ def objective(trial):
     # 实例化模型、损失函数和优化器
     cnn = CNN().to(device)
     loss_fn = MAPELoss().to(device)
-    optimizer = optim.Adam(cnn.parameters(), lr=learning_rate, weight_decay=weight_decay)
+    optimizer = optim.Adam(
+        cnn.parameters(), lr=learning_rate, weight_decay=weight_decay)
 
     # 数据加载
     transform = transforms.ToTensor()
     train_dataset = MyData(image_folder='T_V_img_data/train_183_4758',
                            excel_file='T_V_img_data/train_enlarge.xlsx',
                            transform=transform)
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+    train_loader = DataLoader(
+        train_dataset, batch_size=batch_size, shuffle=True)
 
     val_dataset = MyData(image_folder='T_V_img_data/val_46_1196',
                          excel_file='T_V_img_data/val_enlarge.xlsx',
                          transform=transform)
     val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
-
 
     total_train_step = 0
     total_val_step = 0
@@ -116,7 +114,6 @@ def objective(trial):
             val_loss /= len(val_loader)
             print(f"Epoch {epoch + 1}, Val Loss: {val_loss}")
 
-
     # 返回验证损失作为优化目标
     return val_loss
 
@@ -135,4 +132,3 @@ print(f"  Value: {trial.value}")
 params = trial.params
 for key, value in params.items():
     print(f"    {key}: {value}")
-
