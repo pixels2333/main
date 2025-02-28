@@ -59,15 +59,15 @@ transform = transforms.ToTensor()
 # 创建自定义Dataset实例
 batch_size = 32
 # 创建训练数据集实例
-train_dataset = MyData(image_folder='T_V_img_data/train_183_4758',
-                       excel_file='T_V_img_data/train_enlarge.xlsx', transform=transform)
+train_dataset = MyData(image_folder='/kaggle/input/yhz-yolo/T_V_img_data/train_183_4758',
+                       excel_file='/kaggle/input/yhz-yolo/T_V_img_data/train_enlarge.xlsx', transform=transform)
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-val_dataset = MyData(image_folder='T_V_img_data/val_46_1196',
-                     excel_file='T_V_img_data/val_enlarge.xlsx', transform=transform)
+val_dataset = MyData(image_folder='/kaggle/input/yhz-yolo/T_V_img_data/val_46_1196',
+                     excel_file='/kaggle/input/yhz-yolo/T_V_img_data/val_enlarge.xlsx', transform=transform)
 val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=True)
 # 创建测试数据集实例
-test_dataset = MyData(image_folder='Test',
-                      excel_file='test.xlsx', transform=transform)
+test_dataset = MyData(image_folder='/kaggle/input/yhz-yolo/Test',
+                      excel_file='/kaggle/input/yhz-yolo/test.xlsx', transform=transform)
 test_loader = DataLoader(test_dataset, batch_size=1, shuffle=False)
 
 # 引用神经网络并设定有关参数
