@@ -86,7 +86,7 @@ optimizer = torch.optim.Adam(cnn.parameters(
 # 设置训练参数
 total_train_step = 0
 total_val_step = 0
-epoch = 300
+epoch = 50
 
 # 训练过程利用tensorboard实现可视化
 writer = SummaryWriter("logs")
