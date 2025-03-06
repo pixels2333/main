@@ -188,5 +188,6 @@ for i in range(3):
     plt.title(f'Output {i+1} - R2: {r2:.4f}, NRMSE: {nrmse:.4f}')
     plt.legend()
     plt.show()
+    plt.savefig('output.png')
 # 关闭TensorBoard writer
 writer.close()
