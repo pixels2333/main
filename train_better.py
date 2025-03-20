@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.base import r2_score
 import torch.optim
 from sklearn.linear_model import LinearRegression
 from torch.utils.data import DataLoader
@@ -25,12 +26,12 @@ class MAPELoss(nn.Module):
 
 
 # 定义R2决定系数
-def r2_score(predictions, targets):
-    predictions_mean = targets.mean()
-    ss_total = torch.sum((targets - predictions_mean) ** 2)
-    ss_residual = torch.sum((targets - predictions) ** 2)
-    r2 = 1 - (ss_residual / ss_total)
-    return r2.item()
+# def r2_score(predictions, targets):
+#     predictions_mean = targets.mean()
+#     ss_total = torch.sum((targets - predictions_mean) ** 2)
+#     ss_residual = torch.sum((targets - predictions) ** 2)
+#     r2 = 1 - (ss_residual / ss_total)
+#     return r2.item()
 
 
 # 定义NRMSE
