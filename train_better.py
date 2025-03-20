@@ -177,6 +177,13 @@ for i in range(3):
     r2 = r2_score(predictions_tensor, targets_tensor)
     nrmse = nrmse_score(predictions_tensor, targets_tensor,
                         data_range=targets_tensor.max() - targets_tensor.min())
+    
+    print(f"输出 {i+1} 的统计信息:")
+    print(f"  平均值: {np.mean(targets_list[i]):.4f}")
+    print(f"  最小值: {np.min(targets_list[i]):.4f}")
+    print(f"  最大值: {np.max(targets_list[i]):.4f}")
+    print(f"  标准差: {np.std(targets_list[i]):.4f}")
+    print(f"  零值比例: {np.sum(np.array(targets_list[i]) == 0) / len(targets_list[i]) * 100:.2f}%")
 
     # 作图
     plt.figure(figsize=(8, 6))
